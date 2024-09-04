@@ -11,10 +11,10 @@ class UserModel {
     }
 }
 
-static async newUser(firstName, lastName, years) {
-    try {
+    static async newUser(firstName, lastName, years) {
+         try {
         
-        const [result] = await pool.query(
+            const [result] = await pool.query(
             'INSERT INTO user (firstname, lastname, years) VALUES ( ?, ?, ?)',
             [firstName, lastName, years]
         );
@@ -24,6 +24,17 @@ static async newUser(firstName, lastName, years) {
         throw new Error('Database query failed');
     }
 }
+
+    static async destroyUser(id) {
+        try {
+            const [destroy] = await pool.query("DELETE FROM user WHERE id = ?", [id]);
+            return destroy;
+        } catch (err) {
+            console.error("Error destroy", err);
+            throw new Error('Database query failed');
+        }
+    }
+
 }
 
 export default UserModel;

@@ -8,4 +8,6 @@ router.get('/', (req, res) => {
 
 router.get('/all', UserController.getAllUsers);
 router.post('/newUser', UserController.addNewUser);
+router.post('/deleteUser', UserController.deleteUser);
+
 export default router;

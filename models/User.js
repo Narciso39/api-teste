@@ -34,7 +34,15 @@ class UserModel {
             throw new Error('Database query failed');
         }
     }
-
+    static async editUsers(id, firstName, lastName, years) {
+        try {
+            const [edit] = await pool.query('UPDATE user SET firstname = ?, lastname = ?, years = ? WHERE id = ?', [firstName, lastName, years, id]);
+            return edit;
+        } catch (err) {
+            console.error("Error update", err);
+            throw new Error('Database query failed');
+        }
+    }
 }
 
 export default UserModel;

@@ -32,13 +32,34 @@ class UserController {
             const {id} = req.body;
 
             const destroy = await UserModel.destroyUser(id);
-            
+
             if (destroy) { 
                 res.status(204).send(); 
+               
+            } else {
                 res.status(404).json({ message: 'Usuário não encontrado' });
             }
         } catch (error) {
             console.error('Erro ao deletar o usuário', error);
+            res.status(500).send('Erro');
+        }
+    }
+
+    static async editUser(req, res) {
+        try {
+
+            const  {id, firstName, lastName, years} = req.body; 
+
+            const edit  = await UserModel.editUsers(id, firstName, lastName, years);
+
+            if (edit) {
+                res.status(204).send();
+                
+            } else {
+                res.status(404).json({ message: 'Usuário não encontrado' });
+            }
+        } catch (err) { 
+            console.error('Erro ao editar o usuário', error);
             res.status(500).send('Erro');
         }
     }

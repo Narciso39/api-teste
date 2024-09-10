@@ -11,6 +11,18 @@ class UserController {
         }
     }
 
+    static async getUser(req, res) {
+           try {
+            const {id} = req.body;
+            const user = await UserModel.User(id);
+            res.json(user);
+
+           } catch (err) {
+            console.error('Erro ao buscar usuário:', err);
+            res.status(500).send('Erro Interno do Servidor');
+           }
+    }
+
     static async addNewUser(req, res) {
         try {
             const { firstName, lastName, years } = req.body; 
@@ -22,7 +34,7 @@ class UserController {
             const result = await UserModel.newUser(firstName, lastName, years);
             res.status(201).json({ message: 'Usuário criado com sucesso', result });
         } catch (err) {
-            console.error('Erro ao criar usuário:', error);
+            console.error('Erro ao criar usuário:', err);
             res.status(500).send('Erro Interno do Servidor');
         }
     }
@@ -39,8 +51,8 @@ class UserController {
             } else {
                 res.status(404).json({ message: 'Usuário não encontrado' });
             }
-        } catch (error) {
-            console.error('Erro ao deletar o usuário', error);
+        } catch (err) {
+            console.error('Erro ao deletar o usuário', err);
             res.status(500).send('Erro');
         }
     }
@@ -59,7 +71,7 @@ class UserController {
                 res.status(404).json({ message: 'Usuário não encontrado' });
             }
         } catch (err) { 
-            console.error('Erro ao editar o usuário', error);
+            console.error('Erro ao editar o usuário', err);
             res.status(500).send('Erro');
         }
     }

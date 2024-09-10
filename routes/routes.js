@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   });
 
 router.get('/all', UserController.getAllUsers);
+router.get('/user', UserController.getUser)
 router.post('/newUser', UserController.addNewUser);
 router.post('/deleteUser', UserController.deleteUser);
 router.post('/editUser', UserController.editUser);

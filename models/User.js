@@ -43,6 +43,16 @@ class UserModel {
             throw new Error('Database query failed');
         }
     }
+
+    static async User(id) {
+        try {
+            const [user] = await pool.query('SELECT * FROM user where id = ?', [id]);
+            return user;
+        } catch (err) {
+            console.error("Error select", err);
+            throw new Error('Database query failed');
+        }
+    }
 }
 
 export default UserModel;

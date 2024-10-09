@@ -32,9 +32,9 @@ class UserController {
             }
 
             const result = await UserModel.newUser(firstName, lastName, years);
-            res.status(201).json({
+            return res.status(201).json({
                 message: 'Usuário criado com sucesso',
-                result,
+                user: { firstname: firstName, lastname: lastName, years, id: result.insertId },
             });
         } catch (err) {
             console.error('Erro ao criar usuário:', err);
